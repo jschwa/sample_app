@@ -21,4 +21,15 @@ module SessionsHelper
 		self.current_user = nil
 		cookies.delete(:remember_token)
 	end
+
+	def current_user?(user)
+		user == current_user
+	end
+
+	def signed_in_user
+		unless signed_in?
+			store_locaiton
+			redirect_to signedin_url, notice: "Please sign in."
+		end
+	end
 end
